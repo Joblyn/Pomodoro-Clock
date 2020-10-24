@@ -1,3 +1,75 @@
-.App {
+main {
+  height: 90vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+h2 {
+  font-size: 4rem;
+  font-weight: 400;
+}
+
+h4 {
+  text-align: center;
+  font-size: 2rem;
+  font-weight: 400;
+  margin-top: 0;
+  margin-bottom: 10px;
+}
+
+.interval-container {
+  display: flex;
+  margin: 0 40px;
+  align-items: center;
+}
+
+.interval-length-container {
+  display: flex;
+}
+
+button{
+  background-color: #263646;
+  border: none;
+  outline: none;
+  margin: 0 10px;
+  width: 70px;
+  border-radius: 2px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 5px 10px;
+  cursor: pointer;
+}
+.icon {
+  width: 100%;
+  height: 15px;
+  color: #eeeeee;
+}
+
+.interval-length {
+  font-size: 2rem;
+  margin: 0 10px;
+}
+
+.timer-container {
+  border: 2px solid #263646;
+  margin: 40px;
+  border-radius: 25px;
+  width: 250px;
+  text-align: center;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
+  padding: 10px;
+}
+
+.timer {
+  font-size: 2rem; 
+}
+
+.timer-actions {
+  display: flex;
+  justify-content: center;
+  margin-top: 20px;
   text-align: center;
 }
