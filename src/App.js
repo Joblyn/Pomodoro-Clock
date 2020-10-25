@@ -22,7 +22,7 @@ class App extends Component {
     this.onUpdateTimerMinute=this.onUpdateTimerMinute.bind(this);
     this.onToggleInterval=this.onToggleInterval.bind(this);
     this.onReset = this.onReset.bind(this);
-    this.onPlayStopTimer = this.onPlayStopTimerbind(this);
+    this.onPlayStopTimer = this.onPlayStopTimer.bind(this);
   }
 
   onIncreaseBreakLength() {
@@ -90,18 +90,18 @@ class App extends Component {
   }
 
   render () {
-    const { breakLength, sessionLength, timerMinute } = this.state;
+    const { breakLength, sessionLength, timerMinute, isPlay } = this.state;
     return (
       <main className="App">
         <h2>Pomodoro Clock</h2>
         <section className="interval-length-container">
           <BreakInterval
-          isPlay={this.state.isPlay} 
+          isPlay={isPlay} 
           breakInterval={breakLength} 
           increaseBreakLength={this.onIncreaseBreakLength} 
           decreaseBreakLength={this.onDecreaseBreakLength}/>
           <SessionLength 
-            isPlay={this.state.isPlay}
+            isPlay={isPlay}
             sessionLength={sessionLength}
             decreaseSessionLength={this.onDecreaseSessionLength}
             increaseSessionLength={this.onIncreaseSessionLength}
@@ -110,7 +110,7 @@ class App extends Component {
         <Timer timerMinute={timerMinute} breakLength={breakLength}
         updateTimerMinute={this.onUpdateTimerMinute}
         toggleInterval={this.onToggleInterval}
-        reset = {this.onReset}
+        reset={this.onReset}
         onPlayStopTimer={this.onPlayStopTimer}
         />
       </main>

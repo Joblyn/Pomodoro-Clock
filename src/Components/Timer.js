@@ -14,14 +14,14 @@ class Timer extends Component {
       play: false
     }
 
-    this.clickHandler = this.clickHandler.bind(this);
+    this.playPauseClickHandler = this.playPauseClickHandler.bind(this);
     this.decreaseTimer = this.decreaseTimer.bind(this);
     this.reset = this.reset.bind(this);
     this.play = this.play.bind(this);
     this.pause = this.pause.bind(this);
   }
 
-  clickHandler() {
+  playPauseClickHandler() {
     this.setState({
       play: !this.state.play
     })
@@ -30,6 +30,7 @@ class Timer extends Component {
 
   play() {
     let intervalId = setInterval(this.decreaseTimer, 1000);
+    this.props.onPlayStopTimer(true);
     this.setState({ intervalId: intervalId })
   }
   decreaseTimer() {
@@ -47,11 +48,12 @@ class Timer extends Component {
             });
             this.props.toggleInterval(this.state.isSession);
           }
+        } else {
+          this.props.updateTimerMinute();
+          this.setState({
+            timerSecond:59
+          })
         }
-        this.props.updateTimerMinute();
-        this.setState({
-          timerSecond:59
-        })
         break;
       default: 
         this.setState(prevState=>{
@@ -64,19 +66,19 @@ class Timer extends Component {
   }
 
   pause() {
-    clearInterval(this.state.intervalId)
+    clearInterval(this.state.intervalId);
+    this.props.onPlayStopTimer(false);
   }
 
   reset() {
     this.pause();
     this.props.reset();
+    this.props.onPlayStopTimer(false);
     this.setState({
-      timerSecond: 0
+      timerSecond: 0,
+      play: false,
+      isSession: true
     })
-  }
-
-  onPlayStopTimer() {
-    
   }
 
   render() {
@@ -87,7 +89,7 @@ class Timer extends Component {
         <section className="timer-container">
           <h4 id="timer-label">{isSession ? 'Session' : 'Break'}</h4>
           <div id="time-left">
-            <span className="timer">{timerMinute}</span>
+            <span className="timer">{!timerMinute ? '00' : (timerMinute < 10 ? `0${timerMinute}` : timerMinute)}</span>
             <span className="timer">:</span>
             <span id="time-left" className="timer">{!timerSecond ? '00' : (
               timerSecond < 10 ? `0${timerSecond}` : timerSecond
@@ -95,7 +97,7 @@ class Timer extends Component {
           </div>
         </section>
         <section className="timer-actions">
-            <button id="start_stop" onClick={this.clickHandler}>{!play ? <FontAwesomeIcon className="icon" icon={faPlay}/> : <FontAwesomeIcon className="icon" icon={faPause}/>}</button>
+            <button id="start_stop" onClick={this.playPauseClickHandler}>{!play ? <FontAwesomeIcon className="icon" icon={faPlay}/> : <FontAwesomeIcon className="icon" icon={faPause}/>}</button>
             <button id="reset" onClick={this.reset}><FontAwesomeIcon className="icon" icon={faSyncAlt}/></button>
         </section>
       </section>
