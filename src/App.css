@@ -18,6 +18,9 @@ main {
   h2{
     text-align: center;
   }
+  .icon {
+    font-size: 5rem;
+  }
 }
 h2 {
   font-size: 4rem;
@@ -54,9 +57,10 @@ button{
   align-items: center;
   padding: 10px 15px;
   cursor: pointer;
-  font-size: 25px;
+  font-size: 30px;
   font-weight: 500;
   color: #eeeeee;
+  transition: linear 0.2s;
 }
 button:hover {
   background-color: #eeeeee;
